@@ -14,7 +14,7 @@ The goal is to enhance noisy medical images, improving diagnostic quality and AI
 
 ## 📂 Project Structure
 
-![Structure](assets/strcuture.png)
+![Structure](assets/structure.png)
 ---
 
 ## 🖋️ Overview
