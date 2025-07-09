@@ -1,113 +1,110 @@
 # 🧠 Medical Imaging Denoising
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)  
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/) [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)](https://www.tensorflow.org/) [![Keras](https://img.shields.io/badge/Keras-2.x-red.svg)](https://keras.io/)  
 
-A medical image denoising project focused on pancreatic tumor CT scans. It compares deep learning (Autoencoder) and classical machine learning (Ridge Regression + Deconvolution) approaches for noise reduction.
+This project explores **image denoising techniques** for medical imaging, with a focus on **pancreatic tumor CT scans**. It compares:  
 
-The goal: enhance image quality, improve diagnostic accuracy, and support AI models in medical imaging.
+- 🧠 **Deep Learning (Convolutional Autoencoder)**  
+- 📈 **Classical Machine Learning (Ridge Regression + Frequency-Domain Deconvolution)**  
+
+The goal is to enhance noisy medical images, improving diagnostic quality and AI model performance.
+
+---
 
 ## 📂 Project Structure
-''' bash
-Medical imaging denoising/
-│
-├── Autoencoder/
-│   ├── Dataset/
-│   │   ├── train/
-│   │   └── test/
-│   ├── model.py
-│   └── denoising1.ipynb
-│
-├── Regressione-Deconvoluzione/
-│   ├── Dataset/
-│   │   ├── train/
-│   │   └── test/
-│   └── denoising2.ipynb
-│
-├── assets/
-│   ├── architecture.png
-│   ├── workflow.png
-│   ├── original_sample.png
-│   ├── noisy_sample.png
-│   ├── autoencoder_result.png
-│   ├── regression_result.png
-│   ├── metrics_comparison.png
-│
-├── README.md
-└── LICENSE
-'''
+
+![Structure](assets/strcuture.png)
+---
 
 ## 🖋️ Overview
 
-This project implements and compares two denoising strategies for medical images:
+This repository implements and compares two denoising strategies:  
 
-    🧠 Deep Learning Autoencoder: a convolutional neural network trained to reconstruct clean images from noisy inputs.
+1. 🧠 **Convolutional Autoencoder**  
+   - A neural network trained end-to-end to reconstruct clean images from noisy CT scans.  
+2. 📈 **Ridge Regression + Deconvolution**  
+   - A classical approach enhanced with median filtering.  
 
-    📈 Ridge Regression + Deconvolution: classical techniques enhanced with median filtering.
+Both methods are evaluated on a dataset of **pancreatic tumor images** with synthetic Gaussian noise.
 
-Both methods are evaluated on pancreatic tumor CT scans with artificial Gaussian noise.
+---
 
-## 🚀 Workflow
+## 🚀 Denoising Methods
 
-    Dataset Preparation: Train/Test split of pancreatic tumor CT images.
+### 🧠 Autoencoder (Deep Learning)
 
-    Noise Injection: Add Gaussian noise (noise_factor=0.3).
+A convolutional neural network trained with noisy images as input and clean images as targets.
 
-    Denoising: Apply Autoencoder or classical ML techniques.
+- **Encoder**: Stacked Conv2D layers (ReLU activations, padding='same')  
+- **Decoder**: Stacked Conv2DTranspose layers  
+- **Loss Function**: Mean Squared Error (MSE)  
+- **Optimizer**: Adadelta  
 
-    Evaluation: Compute PSNR, SSIM, and MSE metrics.
+📂 Implemented in:
+- `Autoencoder/model.py`
+- `Autoencoder/denoising1.ipynb`
 
-## 🧠 Autoencoder (Deep Learning)
-Layer Type	Filters	Kernel Size	Strides	Activation	Padding
-Conv2D	15	5x5	1	ReLU	Same
-Conv2DTranspose	15	5x5	1	ReLU	Same
+**Example result:**
+![Autoencoder Result](assets/autoencoder_result.png)
 
-### 📂 Files: Autoencoder/model.py, Autoencoder/denoising1.ipynb
+---
 
-## 📈 Ridge Regression + Deconvolution (Classical ML)
-Step	Description
-Ridge Regression	Predict clean pixels (α=0.1)
-Median Filtering	Post-processing for smoothing
-FFT Deconvolution	Remove blur and residual noise
+### 📈 Ridge Regression + Deconvolution (Classical ML)
 
-### 📂 File: Regressione-Deconvoluzione/denoising2.ipynb
+A two-step process:  
+1. **Ridge Regression** predicts pixel intensities.  
+2. **FFT-based Deconvolution** removes residual blur.  
+3. **Median Filtering** smooths artifacts.  
+
+📂 Implemented in:
+- `Regressione-Deconvoluzione/denoising2.ipynb`
+
+**Example result:**
+![Deconvolution Result](assets/deconvolution_result.png)
+
+---
 
 ## 📊 Results
-Original	Noisy	Autoencoder	Ridge + Deconvolution
-	
-	
-	
-## 📈 Metric Comparison
 
-Technique	PSNR ↑	SSIM ↑	MSE ↓
-Noisy Input	18.4 dB	0.65	0.012
-CNN Autoencoder	28.2 dB	0.92	0.002
-Ridge + Median Filter	24.1 dB	0.85	0.006
-Deconvolution + Median Filter	26.3 dB	0.88	0.004
+All methods are evaluated using the following metrics:  
 
-## 📁 Dataset
+- **PSNR (Peak Signal-to-Noise Ratio)**  
+- **SSIM (Structural Similarity Index)**  
+- **MSE (Mean Squared Error)**  
 
-Autoencoder/Dataset/train/
-Autoencoder/Dataset/test/
-Regressione-Deconvoluzione/Dataset/train/
-Regressione-Deconvoluzione/Dataset/test/
+**Comparison plot:**
+![Results Comparison](assets/results_comparison.png)
 
+| Technique                     | PSNR ↑   | SSIM ↑   | MSE ↓    |
+|-------------------------------|----------|----------|----------|
+| Noisy Input                   | 18.4 dB  | 0.65     | 0.012    |
+| CNN Autoencoder               | 28.2 dB  | 0.92     | 0.002    |
+| Ridge + Median Filter         | 24.1 dB  | 0.85     | 0.006    |
+| Deconvolution + Median Filter | 26.3 dB  | 0.88     | 0.004    |
+
+---
 ## 💻 Getting Started
-1️⃣ Clone the repository
-'''bash
+
+### 📝 Clone the repository
+```bash
 git clone https://github.com/<your-username>/medical-imaging-denoising.git
 cd medical-imaging-denoising
+```
 
-2️⃣ Install dependencies
-
+### 📝 Install dependencies
+```bash
 pip install -r requirements.txt
+```
 
-3️⃣ Run the notebooks
-
+### 📝 Run the notebooks
+```bash
 cd Autoencoder
 jupyter notebook denoising1.ipynb
 
 cd ../Regressione-Deconvoluzione
 jupyter notebook denoising2.ipynb
-'''
+```
 
 ## 📜 License
 
@@ -117,6 +114,6 @@ This project is licensed under the MIT License - see LICENSE.
 
 Giovanni Previtera
 📧 Email
-🌐 GitHub🧠 Medical Imaging Denoising
+🌐 GitHub
 
 
