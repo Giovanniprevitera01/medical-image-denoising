@@ -5,7 +5,7 @@
 
 This project explores **image denoising techniques** for medical imaging, with a focus on **pancreatic tumor CT scans**. It compares:  
 
-- 🧠 **Deep Learning (Convolutional Autoencoder)**  
+- 🧠 **Convolutional Autoencoder**  
 - 📈 **Classical Machine Learning (Ridge Regression + Frequency-Domain Deconvolution)**  
 
 The goal is to enhance noisy medical images, improving diagnostic quality and AI model performance.
@@ -32,7 +32,7 @@ Both methods are evaluated on a dataset of **pancreatic tumor images** with synt
 
 ## 🚀 Denoising Methods
 
-### 🧠 Autoencoder (Deep Learning)
+### 🧠 Autoencoder
 
 A convolutional neural network trained with noisy images as input and clean images as targets.
 
@@ -50,7 +50,7 @@ A convolutional neural network trained with noisy images as input and clean imag
 
 ---
 
-### 📈 Ridge Regression + Deconvolution (Classical ML)
+### 📈 Ridge Regression + Deconvolution 
 
 A two-step process:  
 1. **Ridge Regression** predicts pixel intensities.  
@@ -105,10 +105,6 @@ jupyter notebook denoising1.ipynb
 cd ../Regressione-Deconvoluzione
 jupyter notebook denoising2.ipynb
 ```
-
-## 📜 License
-
-This project is licensed under the MIT License - see LICENSE.
 
 ## 👨‍💻 Author
 
